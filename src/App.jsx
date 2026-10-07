@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import Filtres from './components/Filtres';
+=======
+import { useState } from "react";
+import TaskList from "./components/TaskList";
+import TaskItem from "./components/TaskItem";
+>>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
 import './App.css'
+import TaskForm from './components/TaskForm'
+import Compteur from './components/Compteur'
 
 function App() {
+<<<<<<< HEAD
 
   const [filtre, setFiltre] = useState("toutes");
 
@@ -10,8 +19,81 @@ function App() {
     <> 
       <h1>Mes tâches</h1>
       <Filtres filtre={filtre} setFiltre={setFiltre}/>
+=======
+  const [taches, setTaches] = useState([
+    { id: 1, texte: "Réviser le chapitre 3", terminee: false },
+    { id: 2, texte: "Envoyer le rapport à M. Dubois", terminee: true },
+    { id: 3, texte: "Préparer la réunion de lundi", terminee: false },
+  ]);
+
+
+  function ajouterTache (texte) {
+    const nouvelleTache = {
+      id: Date.now(),
+      texte: texte,
+      terminee: false,
+    };
+    setTaches([...taches, nouvelleTache]);
+  };
+
+  const basculerTache = (id) => {
+    setTaches(
+      taches.map((tache) =>
+        tache.id === id ? { ...tache, terminee: !tache.terminee } : tache
+      )
+    );
+  };
+
+  const supprimerTache = (id) => {
+    setTaches(
+     taches.filter((tache) => 
+        tache.id !== id
+      )
+    )
+  }
+
+  const supprimerTerminees = () => {
+    setTaches(
+      taches.filter((tache) =>
+         !tache.terminee
+      )
+    )
+  }
+
+  function toutMarquerCommeFait() {
+    setTaches(
+      taches.map(function (tache) {
+        return { ...tache, terminee: true };
+      })
+    );
+  }
+
+  return (
+    <>
+      <div className="container">
+        <h1>Mes tâches</h1>
+
+      <TaskForm onAddTask={ajouterTache}/>
+
+        <TaskList
+        taches={taches}
+          onToggle={basculerTache}
+          onSupprimer={supprimerTache}
+        />
+
+        <div className="actions-globales">
+          <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
+          <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
+        </div>
+
+      </div>
+>>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
     </>
-  )
+  );
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
 export default App;
