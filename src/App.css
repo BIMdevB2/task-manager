@@ -43,7 +43,21 @@
     border-radius: 6px;
 }
 
+        /* LISTE */
+/* liste non rangée */
+.task-item input {
 
+}
+
+.task-item-terminee {
+    text-decoration: line-through;
+    color: gray;
+}
+
+/* button */
+.task-item {
+    
+}
 
             /* FILTRE */
 .normalButton:hover{
