@@ -57,29 +57,31 @@ function App() {
 
   const [filtre, setFiltre] = useState("toutes");
 
-  return (
-    <> 
-      <h1>Mes tâches</h1>
-      <Filtres filtre={filtre} setFiltre={setFiltre}/>
+  function modifierFiltre(filtre) {
+    setFiltre(filtre);
+  }
 
-      <div className="container">
-        <h1>Mes tâches</h1>
+  return (
+
+    <div className="container">
+      <h1>Mes tâches</h1>
 
       <TaskForm onAddTask={ajouterTache}/>
 
-        <TaskList
+      <TaskList
         taches={taches}
-          onToggle={basculerTache}
-          onSupprimer={supprimerTache}
-        />
+        onToggle={basculerTache}
+        onSupprimer={supprimerTache}
+      />
 
-        <div className="actions-globales">
-          <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
-          <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
-        </div>
-
+      <div className="actions-globales">
+        <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
+        <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
       </div>
-    </>
+
+      <Filtres filtre={filtre} onFiltre={modifierFiltre}/>
+
+    </div>
   );
 }
 

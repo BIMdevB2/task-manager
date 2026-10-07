@@ -1,15 +1,15 @@
-function Filtres ({filtre, setFiltre}) {
+function Filtres ({filtre, onFiltre}) {
 
     return (
     <div>
       <button className =  {`btn btn-outline-primary ${filtre === "toutes" ? "actif" : "normalButton"} `}
-        onClick={() => setFiltre("toutes")}>Toutes</button>
+        onClick={() => onFiltre("toutes")}>Toutes</button>
 
       <button className = {`btn btn-outline-primary ${filtre === "en-cours" ? "actif" : "normalButton"} `}
-        onClick={() => setFiltre("en-cours")}>En cours</button>
+        onClick={() => onFiltre("en-cours")}>En cours</button>
 
       <button className = {`btn btn-outline-primary ${filtre === "terminees" ? "actif" : "normalButton"} `}
-        onClick={() => setFiltre("terminees")}>Terminées</button>
+        onClick={() => onFiltre("terminees")}>Terminées</button>
 
     </div>
     );

@@ -1,5 +1,4 @@
 
-
 .normalButton:hover{
     background-color: white !important;
     color: #0d6efd !important;
@@ -9,8 +8,6 @@
 .actif {
     background-color: #0d6efd !important;
     color: white !important;
-    border-radius: 20px;
-    padding: 10px;
 }
 
 .actif:hover {
