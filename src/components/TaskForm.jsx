@@ -25,4 +25,5 @@ function TaskForm({onAddTask}) {
         </form>
     );
 }
+
 export default TaskForm;
