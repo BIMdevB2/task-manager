@@ -63,6 +63,12 @@ function App() {
 
   const remainingTasks = taches.filter((tache) => !tache.terminee).length
 
+  const tachesFiltrees = taches.filter((tache) => {
+    if (filtre === "en-cours") return !tache.terminee;
+    if (filtre === "terminees") return tache.terminee;
+    return true;
+  });
+
   return (
     <>
       {/* <Compteur /> */}
@@ -71,7 +77,7 @@ function App() {
         <TaskForm onAddTask={ajouterTache} />
 
         <TaskList
-          taches={taches}
+          taches={tachesFiltrees}
           onToggle={basculerTache}
           onSupprimer={supprimerTache}
         />
@@ -81,7 +87,7 @@ function App() {
           <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
         </div>
 
-        <Filtres filtre={filtre} onFiltre={modifierFiltre}/>
+        <Filtres filtreActif={filtre} onChangerFiltre={setFiltre} />
 
       </div>
     </>
