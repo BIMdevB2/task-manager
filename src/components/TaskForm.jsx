@@ -17,14 +17,10 @@ function TaskForm({onAddTask}) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (setTask.title.trim() === "") {
-            setError('Le titre ne doit pas être vide.')
-            return;
-        }
 
         const newTask = {
             id: Date.now(),
-            title: setTask.title.trim(),
+            title: setTask.title,
             completed: false
         }
         

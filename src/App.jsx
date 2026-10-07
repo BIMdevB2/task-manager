@@ -1,25 +1,12 @@
-<<<<<<< HEAD
 import { useState } from 'react'
 import Filtres from './components/Filtres';
-=======
-import { useState } from "react";
 import TaskList from "./components/TaskList";
-import TaskItem from "./components/TaskItem";
->>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
+// import TaskItem from "./components/TaskItem";
 import './App.css'
 import TaskForm from './components/TaskForm'
-import Compteur from './components/Compteur'
+// import Compteur from './components/Compteur'
 
 function App() {
-<<<<<<< HEAD
-
-  const [filtre, setFiltre] = useState("toutes");
-
-  return (
-    <> 
-      <h1>Mes tâches</h1>
-      <Filtres filtre={filtre} setFiltre={setFiltre}/>
-=======
   const [taches, setTaches] = useState([
     { id: 1, texte: "Réviser le chapitre 3", terminee: false },
     { id: 2, texte: "Envoyer le rapport à M. Dubois", terminee: true },
@@ -68,8 +55,13 @@ function App() {
     );
   }
 
+  const [filtre, setFiltre] = useState("toutes");
+
   return (
-    <>
+    <> 
+      <h1>Mes tâches</h1>
+      <Filtres filtre={filtre} setFiltre={setFiltre}/>
+
       <div className="container">
         <h1>Mes tâches</h1>
 
@@ -87,13 +79,9 @@ function App() {
         </div>
 
       </div>
->>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
     </>
   );
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 1667182ebcab0bd78712094001fef2ea7d18b6e1
 export default App;
