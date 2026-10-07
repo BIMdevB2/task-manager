@@ -1,62 +1,165 @@
 /* Container */
 
 .container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: 1rem;
-    border: 1px solid black;
-    padding: 1rem;
+    border: 2px solid #d3deea;
+    padding: 1.5rem;
     border-radius: 20px;
     margin-top: 2rem;
+    max-width: 600px;
+}
+
+.container > * {
+    grid-column: 1 / -1;
 }
 
             /* Titre : "mes tâches */
 .titre {
-    text-align: center;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1b2a41;
+    margin: 0;
 }
 
             /* FORMULAIRE */
-
-/* input formulaire */
 
 .task-form {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    width: 50%;
-}
-
-.task-form div {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-/* label */
-.task-form div #title {
-    flex: 1;
-    margin-left: 8px;
+    width: 100%;
 }
 
 /* input */
-.task-form div input {
-    border-radius: 6px;
+.task-form input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid #b9cde3;
+    border-radius: 8px;
+}
+
+.task-form input::placeholder {
+    font-style: italic;
+    color: #8a9bb0;
+}
+
+.task-form input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
 }
 
         /* LISTE */
-/* liste non rangée */
-.task-item input {
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+.task-item,
+.task-item-terminee {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e6edf5;
+}
+
+.task-item span,
+.task-item-terminee span {
+    flex: 1;
+}
+
+/* checkbox */
+.task-item input[type="checkbox"],
+.task-item-terminee input[type="checkbox"] {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    border: 2px solid #0d6efd;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .task-item-terminee {
-    text-decoration: line-through;
     color: gray;
 }
 
-/* button */
-.task-item {
-    
+.task-item-terminee span {
+    text-decoration: line-through;
+}
+
+/* bouton X */
+.task-item .btn-danger,
+.task-item-terminee .btn-danger {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    font-weight: 700;
+    padding: 0 0.5rem;
+}
+
+.task-item .btn-danger:hover,
+.task-item .btn-danger:active,
+.task-item-terminee .btn-danger:hover,
+.task-item-terminee .btn-danger:active {
+    background: #fdecee;
+    color: #dc3545;
+}
+
+        /* PIED : compteur, actions, filtres */
+.span {
+    grid-column: 1;
+    align-self: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.filtres {
+    grid-column: 2;
+    display: flex;
+    gap: 8px;
+}
+
+.actions-globales {
+    order: 1;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+        /* BOUTONS */
+.task-form button,
+.actions-globales button,
+.filtres button {
+    padding: 0.45rem 1rem;
+    border: 1.5px solid #0d6efd;
+    border-radius: 10px;
+    background-color: white;
+    color: #0d6efd;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.actions-globales button:hover,
+.filtres button:hover {
+    background-color: #e7f1ff;
+}
+
+/* bouton Ajouter : plein */
+.task-form button {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 600;
+}
+
+.task-form button:hover {
+    background-color: #0b5ed7;
 }
 
             /* FILTRE */
@@ -75,6 +178,10 @@
     background-color: #0d6efd !important;
     color: white !important;
     box-shadow: 4px 4px 5px rgb(15, 15, 15);
+}
+
+.filtres .actif {
+    font-weight: 700;
 }
 
 .barre {
