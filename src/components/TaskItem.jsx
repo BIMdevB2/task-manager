@@ -1,7 +1,7 @@
 function TaskItem({ tache, onToggle, onSupprimer }) {
   return (
-    <li className={`task-item ${tache.terminee ? "terminee" : ""}`}>
-      <input
+    <li className={`task-item${tache.terminee ? "-terminee" : ""}`}>
+      <input className="form-check-input"
         type="checkbox"
         checked={tache.terminee}
         onChange={() => onToggle(tache.id)}
@@ -9,7 +9,7 @@ function TaskItem({ tache, onToggle, onSupprimer }) {
 
       <span>{tache.texte}</span>
 
-      <button onClick={() => onSupprimer(tache.id)}>
+      <button className="btn btn-danger" onClick={() => onSupprimer(tache.id)}>
         X
       </button>
     </li>
