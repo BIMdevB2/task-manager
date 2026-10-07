@@ -1,53 +1,30 @@
 import { useState } from "react";
 
-function TaskForm({onAddTask}) {
-    const [task, setTask] = useState({
-        title: '',
-    })
+// Q6 : Formulaire contrôlé
+ function TaskForm({ onAddTask }) {
+  const [texte, setTexte] = useState("");
 
-    const [error, setError] = useState()
-    
-    function handleChange(event) {
-        const {name, value} = event.target;
-        setTask((currentData) => ({
-            ...currentData,
-            [name]: value,
-        }))
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        if (setTask.title.trim() === "") {
-            setError('Le titre ne doit pas être vide.')
-            return;
-        }
+    // Q9 : Refuse un texte vide ou composé uniquement d'espaces
+    if (!texte.trim()) return "Le texte est invalide";
+    onAddTask(texte.trim());
+    setTexte("");
+  };
 
-        const newTask = {
-            id: Date.now(),
-            title: setTask.title.trim(),
-            completed: false
-        }
-        
-        onAddTask(newTask)
 
-        setTask({
-            title: '',
-        })
-
-        setError('')
-    }
-
-    return (
-        <form className="task-form" onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="title">Titre</label>
-                <input type="text" id='title' name='title' 
-                    placeholder="Nouvelle tâche" value={task.title} onChange={handleChange}
-                />
-            </div>
-            {error && <p className="error">{error}</p>}
-            <button type="submit">Ajouter</button>
-        </form>
-    );
+  return (
+    <form className="task-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Nouvelle tâche..."
+        value={texte}
+        onChange={(e) => setTexte(e.target.value)}
+      />
+      <button type="submit">Ajouter</button>
+    </form>
+  );
 }
+
 export default TaskForm;
