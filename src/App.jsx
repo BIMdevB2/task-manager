@@ -61,7 +61,7 @@ function App() {
     setFiltre(filtre);
   }
 
-  const remainingTasks = taches.filter((tache) => !tache.terminee).length
+  const remainingTasks = taches.filter((tache) => !tache.terminee).length //on utulise pas de usestate pour eviter la desynchonisation des states(valeur)
 
   const tachesFiltrees = taches.filter((tache) => {
     if (filtre === "en-cours") return !tache.terminee;
