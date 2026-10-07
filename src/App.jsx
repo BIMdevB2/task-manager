@@ -1,122 +1,98 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import Filtres from './components/Filtres';
+import TaskForm from './components/TaskForm'
+import Compteur from './components/Compteur'
+import TaskList from "./components/TaskList";
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [taches, setTaches] = useState([
+    { id: 1, texte: "Réviser le chapitre 3", terminee: false },
+    { id: 2, texte: "Envoyer le rapport à M. Dubois", terminee: true },
+    { id: 3, texte: "Préparer la réunion de lundi", terminee: false },
+  ]);
+
+
+  function ajouterTache (texte) {
+    const nouvelleTache = {
+      id: Date.now(),
+      texte: texte,
+      terminee: false,
+    };
+    setTaches([...taches, nouvelleTache]);
+  };
+
+  //cette function pemet de basculer l'état de validité de la tache
+  const basculerTache = (id) => {
+    setTaches(
+      taches.map((tache) =>
+        tache.id === id ? { ...tache, terminee: !tache.terminee } : tache
+      )
+    );
+  };
+
+  const supprimerTache = (id) => {
+    setTaches(
+     taches.filter((tache) => 
+        tache.id !== id
+      )
+    )
+  }
+
+  const supprimerTerminees = () => {
+    setTaches(
+      taches.filter((tache) =>
+         !tache.terminee
+      )
+    )
+  }
+
+  function toutMarquerCommeFait() {
+    setTaches(
+      taches.map(function (tache) {
+        return { ...tache, terminee: true };
+      })
+    );
+  }
+
+  const [filtre, setFiltre] = useState("toutes");
+
+  function modifierFiltre(filtre) {
+    setFiltre(filtre);
+  }
+
+  const remainingTasks = taches.filter((tache) => !tache.terminee).length
+
+  const tachesFiltrees = taches.filter((tache) => {
+    if (filtre === "en-cours") return !tache.terminee;
+    if (filtre === "terminees") return tache.terminee;
+    return true;
+  });
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      {/* <Compteur /> */}
+      <div className="container">
+        <h1>Mes tâches</h1>
+        <TaskForm onAddTask={ajouterTache} />
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <TaskList
+          taches={tachesFiltrees}
+          onToggle={basculerTache}
+          onSupprimer={supprimerTache}
+        />
+        <Compteur remainingTasks={remainingTasks} />
+        <div className="actions-globales">
+          <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
+          <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        <Filtres filtreActif={filtre} onChangerFiltre={setFiltre} />
+
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+
+export default App;
