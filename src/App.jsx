@@ -1,6 +1,9 @@
 import { useState } from "react";
 import TaskList from "./components/TaskList";
 import TaskItem from "./components/TaskItem";
+import './App.css'
+import TaskForm from './components/TaskForm'
+import Compteur from './components/Compteur'
 
 function App() {
   const [taches, setTaches] = useState([
@@ -52,24 +55,26 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>Mes tâches</h1>
+    <>
+      <div className="container">
+        <h1>Mes tâches</h1>
 
+      <TaskForm onAddTask={ajouterTache}/>
 
-      <TaskList
-      taches={taches}
-        onToggle={basculerTache}
-        onSupprimer={supprimerTache}
-      />
+        <TaskList
+        taches={taches}
+          onToggle={basculerTache}
+          onSupprimer={supprimerTache}
+        />
 
-      <div className="actions-globales">
-        <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
-        <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
+        <div className="actions-globales">
+          <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
+          <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
+        </div>
+
       </div>
-
-    </div>
+    </>
   );
-
 }
 
 
