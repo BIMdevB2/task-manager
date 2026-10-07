@@ -36,13 +36,13 @@ function TaskForm({onAddTask}) {
     return (
         <form className="task-form" onSubmit={handleSubmit}>
             <div>
-                <label htmlFor="title">Titre</label>
+                <label htmlFor="title">Titre </label>
                 <input type="text" id='title' name='title' 
                     placeholder="Nouvelle tâche" value={task.title} onChange={handleChange}
                 />
             </div>
             {error && <p className="error">{error}</p>}
-            <button type="submit">Ajouter</button>
+            <button type="submit" className="btn btn-primary">Ajouter</button>
         </form>
     );
 }

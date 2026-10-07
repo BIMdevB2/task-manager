@@ -64,7 +64,7 @@ function App() {
   return (
 
     <div className="container">
-      <h1>Mes tâches</h1>
+      <h1 className="titre">Mes tâches</h1>
 
       <TaskForm onAddTask={ajouterTache}/>
 
