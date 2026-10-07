@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import Filtres from './components/Filtres';
-import TaskList from "./components/TaskList";
-// import TaskItem from "./components/TaskItem";
-import './App.css'
 import TaskForm from './components/TaskForm'
-// import Compteur from './components/Compteur'
+import Compteur from './components/Compteur'
+import TaskList from "./components/TaskList";
+import './App.css'
 
 function App() {
   const [taches, setTaches] = useState([
@@ -23,6 +22,7 @@ function App() {
     setTaches([...taches, nouvelleTache]);
   };
 
+  //cette function pemet de basculer l'état de validité de la tache
   const basculerTache = (id) => {
     setTaches(
       taches.map((tache) =>
@@ -61,27 +61,30 @@ function App() {
     setFiltre(filtre);
   }
 
+  const remainingTasks = taches.filter((tache) => !tache.terminee).length
+
   return (
+    <>
+      {/* <Compteur /> */}
+      <div className="container">
+        <h1>Mes tâches</h1>
+        <TaskForm onAddTask={ajouterTache} />
 
-    <div className="container">
-      <h1 className="titre">Mes tâches</h1>
+        <TaskList
+          taches={taches}
+          onToggle={basculerTache}
+          onSupprimer={supprimerTache}
+        />
+        <Compteur remainingTasks={remainingTasks} />
+        <div className="actions-globales">
+          <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
+          <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
+        </div>
 
-      <TaskForm onAddTask={ajouterTache}/>
+        <Filtres filtre={filtre} onFiltre={modifierFiltre}/>
 
-      <TaskList
-        taches={taches}
-        onToggle={basculerTache}
-        onSupprimer={supprimerTache}
-      />
-
-      <div className="actions-globales">
-        <button onClick={toutMarquerCommeFait}>Tout Marquer Comme Fait</button>
-        <button onClick={supprimerTerminees}>Supprimer les Taches Terminées</button>
       </div>
-
-      <Filtres filtre={filtre} onFiltre={modifierFiltre}/>
-
-    </div>
+    </>
   );
 }
 
