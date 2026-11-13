@@ -3,8 +3,10 @@ function Compteur({ remainingTasks }) {
 
     if (remainingTasks === 0) {
         message = "Tout est fait !"
-    } else if (remainingTasks < 2) {
-        message = "Il reste une tâche"
+    } else if (remainingTasks = 1) {
+        message = "Il reste une tâche restante"
+    }else if (remainingTasks = 3) {
+        message = "Il reste 3 tâches restantes"
     } else {
         message = `${remainingTasks} tâches restantes`
     }
